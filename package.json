@@ -11,7 +11,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "npm run client",
     "build":
-      "API_HOST=https://gamestore-api.azurewebsites.net/ webpack --env production ",
+      "NODE_ENV=production API_HOST=https://gamestore-api.azurewebsites.net webpack --env production ",
     "client":
       "PORT=12090 webpack-dev-server --mode development --devtool inline-source-map --hot"
   },
