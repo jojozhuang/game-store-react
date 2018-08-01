@@ -75,7 +75,8 @@ const productionConfig = merge([
       name: "public/fonts/[name].[ext]",
       publicPath: "../" // Take the directory into account
     }
-  })
+  }),
+  parts.loadStatic()
 ]);
 
 const developmentConfig = merge([

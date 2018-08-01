@@ -1,15 +1,15 @@
 exports.devServer = ({ host, port } = {}) => ({
   devServer: {
-    stats: 'errors-only',
+    stats: "errors-only",
     host, // Defaults to `localhost`
     port, // Defaults to 8080
     open: true,
     overlay: true,
     historyApiFallback: true,
     proxy: {
-      '/api': process.env.API_HOST,
-    },
-  },
+      "/api": process.env.API_HOST
+    }
+  }
 });
 
 exports.loadCSS = ({ include, exclude } = {}) => ({
@@ -20,18 +20,18 @@ exports.loadCSS = ({ include, exclude } = {}) => ({
         include,
         exclude,
 
-        use: ['style-loader', 'css-loader'],
-      },
-    ],
-  },
+        use: ["style-loader", "css-loader"]
+      }
+    ]
+  }
 });
 
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 exports.extractCSS = ({ include, exclude, use }) => {
   // Output extracted CSS to a file
   const plugin = new MiniCssExtractPlugin({
-    filename: './styles/[name].css',
+    filename: "./styles/[name].css"
   });
 
   return {
@@ -42,18 +42,18 @@ exports.extractCSS = ({ include, exclude, use }) => {
           include,
           exclude,
 
-          use: [MiniCssExtractPlugin.loader].concat(use),
-        },
-      ],
+          use: [MiniCssExtractPlugin.loader].concat(use)
+        }
+      ]
     },
-    plugins: [plugin],
+    plugins: [plugin]
   };
 };
 
-const PurifyCSSPlugin = require('purifycss-webpack');
+const PurifyCSSPlugin = require("purifycss-webpack");
 
 exports.purifyCSS = ({ paths }) => ({
-  plugins: [new PurifyCSSPlugin({ paths })],
+  plugins: [new PurifyCSSPlugin({ paths })]
 });
 
 exports.loadImages = ({ include, exclude, options } = {}) => ({
@@ -64,12 +64,12 @@ exports.loadImages = ({ include, exclude, options } = {}) => ({
         include,
         exclude,
         use: {
-          loader: 'url-loader',
-          options,
-        },
-      },
-    ],
-  },
+          loader: "url-loader",
+          options
+        }
+      }
+    ]
+  }
 });
 
 exports.loadFonts = ({ include, exclude, options } = {}) => ({
@@ -80,23 +80,37 @@ exports.loadFonts = ({ include, exclude, options } = {}) => ({
         include,
         exclude,
         use: {
-          loader: 'url-loader',
-          options,
-        },
-      },
-    ],
-  },
+          loader: "url-loader",
+          options
+        }
+      }
+    ]
+  }
 });
 
-const webpack = require('webpack');
+const CopyWebpackPlugin = require("copy-webpack-plugin");
+
+exports.loadStatic = () => ({
+  plugins: [
+    new CopyWebpackPlugin([
+      {
+        from: "./public/_redirects",
+        to: "./public/_redirects",
+        toType: "file"
+      }
+    ])
+  ]
+});
+
+const webpack = require("webpack");
 
 exports.loadEnv = ({ url }) => ({
   plugins: [
     new webpack.DefinePlugin({
-      'process.env': {
+      "process.env": {
         API_HOST: JSON.stringify(url),
-        PUBLIC_URL: JSON.stringify('./public'),
-      },
-    }),
-  ],
+        PUBLIC_URL: JSON.stringify("./public")
+      }
+    })
+  ]
 });

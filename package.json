@@ -10,12 +10,12 @@
     "lint:watch": "npm run lint -- --watch",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "npm run client",
-    "build":
-      "NODE_ENV=production API_HOST=https://gamestore-api.azurewebsites.net webpack --env production ",
-    "client":
-      "PORT=12090 webpack-dev-server --mode development --devtool inline-source-map --hot"
+    "build": "NODE_ENV=production API_HOST=https://gamestore-api.azurewebsites.net webpack --env production ",
+    "client": "PORT=12090 webpack-dev-server --mode development --devtool inline-source-map --hot"
   },
-  "keywords": ["react"],
+  "keywords": [
+    "react"
+  ],
   "author": "johnny",
   "license": "MIT",
   "dependencies": {
@@ -34,6 +34,7 @@
     "babel-preset-react": "^6.24.1",
     "babel-preset-react-hmre": "^1.1.1",
     "clean-webpack-plugin": "^0.1.19",
+    "copy-webpack-plugin": "^4.5.2",
     "eslint": "^4.13.1",
     "eslint-plugin-import": "^2.8.0",
     "eslint-plugin-react": "^7.5.1",
