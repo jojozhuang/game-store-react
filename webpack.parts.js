@@ -95,7 +95,7 @@ exports.loadStatic = () => ({
     new CopyWebpackPlugin([
       {
         from: "./public/_redirects",
-        to: "./public/_redirects",
+        to: "./_redirects",
         toType: "file"
       }
     ])
