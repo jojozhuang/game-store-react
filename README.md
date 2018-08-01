@@ -4,7 +4,7 @@ A web app to manage products, supporting all CRUD operations, built with React.
 # Function
 This app is used to manage products.
 
-<kbd>![image](/public/assets/productlistafteredit2.png)</kbd>
+<kbd>![image](/public/assets/productlist.png)</kbd>
 
 # Demo
 The [Live Demo](https://game-store-react.netlify.com/) is hosted on Netlify.
