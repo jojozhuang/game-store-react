@@ -6,6 +6,9 @@ This app is used to manage products.
 
 <kbd>![image](/public/assets/productlistafteredit2.png)</kbd>
 
+# Demo
+The [Live Demo](https://game-store-react.netlify.com/) is hosted on Netlify.
+
 # Setup Locally
 ## 1. RESTful API
 Setup server to host RESTful API with Spring Boot or ASP.NET Core, see below.
