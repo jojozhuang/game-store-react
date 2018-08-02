@@ -25,7 +25,7 @@ npm start
 Access http://localhost:12090/ in web browser, enjoy!
 
 # Portfolio
-Read portfolio [Game Store(React)](http://jojozhuang.github.io/portfolio/game-store-react/) to learn the main functions of this React app.
+Read portfolio [Game Store(React)](https://jojozhuang.github.io/portfolio/game-store-react/) to learn the main functions of this React app.
 
 # Tutorial
-Read tutorial [Building Web Application with React](http://jojozhuang.github.io/tutorial/react/building-web-application-with-react/) to learn how this React app is built.
+Read tutorial [Building Web Application with React](https://jojozhuang.github.io/tutorial/react/building-web-application-with-react/) to learn how this React app is built.
