@@ -10,7 +10,7 @@
     "lint:watch": "npm run lint -- --watch",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "npm run client",
-    "build": "webpack --env production ",
+    "build": "NODE_ENV=production webpack --env production ",
     "client":
       "PORT=12090 webpack-dev-server --env development --devtool inline-source-map --hot"
   },
