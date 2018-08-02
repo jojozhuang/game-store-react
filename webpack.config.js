@@ -39,22 +39,13 @@ const commonConfig = merge([
         title: "Online Code Editor",
         template: path.join(__dirname, "./src", "index.html"),
         favicon: path.join(__dirname, "./public", "assets", "favicon.ico")
-      }),
-
-      new webpack.DefinePlugin({
-        "process.env": {
-          API_HOST: JSON.stringify(
-            process.env.API_HOST || "http://localhost:8080"
-          ),
-          PUBLIC_URL: JSON.stringify("./public")
-        }
       })
     ]
   }
 ]);
 
 const productionConfig = merge([
-  // parts.loadEnv('https://online-code-editor-api.herokuapp.com'),
+  parts.loadEnv("https://gamestore-api.azurewebsites.net"),
   parts.extractCSS({
     use: "css-loader"
   }),
@@ -80,7 +71,7 @@ const productionConfig = merge([
 ]);
 
 const developmentConfig = merge([
-  // parts.loadEnv('http://localhost:8080'),
+  parts.loadEnv("http://localhost:8080"),
   parts.devServer({
     // Customize host/port here if needed
     host: process.env.HOST,

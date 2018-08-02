@@ -1,8 +1,8 @@
-import React from 'react';  
-import PropTypes from 'prop-types';
-import AlertSimple from '../controls/AlertSimple';
-import ProductForm from './ProductForm';
-import productApi from '../../api/ProductsApi';
+import React from "react";
+import PropTypes from "prop-types";
+import AlertSimple from "../controls/AlertSimple";
+import ProductForm from "./ProductForm";
+import productApi from "../../api/ProductsApi";
 
 class ProductPage extends React.Component {
   constructor(props) {
@@ -10,7 +10,12 @@ class ProductPage extends React.Component {
     this.state = {
       hasError: false,
       error: {},
-      product: {id: '0', productName: '', price: '', image: process.env.API_HOST+"/images/default.png"},
+      product: {
+        id: "0",
+        productName: "",
+        price: "",
+        image: process.env.API_URL + "/images/default.png"
+      },
       isnew: false
     };
 
@@ -23,14 +28,17 @@ class ProductPage extends React.Component {
   componentDidMount() {
     const pId = this.props.match.params.id;
     const isnew = pId == null;
-    this.setState({isnew: isnew});    
+    this.setState({ isnew: isnew });
 
     if (pId) {
-      productApi.getProduct(pId).then(product => {
-        this.setState({product: product});
-      }).catch(error => {
-        this.handleError(error);
-      });
+      productApi
+        .getProduct(pId)
+        .then(product => {
+          this.setState({ product: product });
+        })
+        .catch(error => {
+          this.handleError(error);
+        });
     }
   }
 
@@ -38,7 +46,7 @@ class ProductPage extends React.Component {
     const field = event.target.name;
     const product = this.state.product;
     product[field] = event.target.value;
-    return this.setState({product: product});
+    return this.setState({ product: product });
   }
 
   handleImageChange(image) {
@@ -47,29 +55,35 @@ class ProductPage extends React.Component {
     this.setState({ error: null });
     // update product to inform child component
     const product = this.state.product;
-    product['image'] = image;
-    return this.setState({product: this.state.product});
+    product["image"] = image;
+    return this.setState({ product: this.state.product });
   }
-  
+
   handleSave(event) {
     event.preventDefault();
     let product = this.state.product;
     //console.log(product);
     if (this.state.isnew) {
-      productApi.createProduct(product).then(response => {
-        this.props.history.push('/products');
-      }).catch(error => {
-        this.handleError(error);
-      });
+      productApi
+        .createProduct(product)
+        .then(response => {
+          this.props.history.push("/products");
+        })
+        .catch(error => {
+          this.handleError(error);
+        });
     } else {
-      productApi.updateProduct(product).then(response => {
-        this.props.history.push('/products');
-      }).catch(error => {
-        this.handleError(error);
-      });
+      productApi
+        .updateProduct(product)
+        .then(response => {
+          this.props.history.push("/products");
+        })
+        .catch(error => {
+          this.handleError(error);
+        });
     }
   }
-  
+
   handleError(error) {
     //console.log(error);
     this.setState({ error: error });
@@ -79,25 +93,26 @@ class ProductPage extends React.Component {
   render() {
     //console.log('ProductPage.render');
     //console.log(this.state);
-    let alert = '';
+    let alert = "";
     if (this.state.hasError) {
-      alert = <AlertSimple error={this.state.error}/>;
+      alert = <AlertSimple error={this.state.error} />;
     }
-    let pageTitle = 'Edit Product';
+    let pageTitle = "Edit Product";
     if (this.state.isnew) {
-      pageTitle = 'Create New Product';
+      pageTitle = "Create New Product";
     }
-    return(
+    return (
       <div className="container">
         <h2>{pageTitle}</h2>
         {alert}
-        <ProductForm 
-          product={this.state.product} 
+        <ProductForm
+          product={this.state.product}
           isnew={this.state.isnew}
           onChange={this.updateProductState}
           onImageChange={this.handleImageChange}
           onSave={this.handleSave}
-          onError={this.handleError}/> 
+          onError={this.handleError}
+        />
       </div>
     );
   }
