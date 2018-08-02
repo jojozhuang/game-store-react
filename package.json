@@ -16,7 +16,10 @@
   "keywords": [
     "react"
   ],
-  "author": "johnny",
+  "author": {
+    "name": "Rong Zhuang",
+    "email": "jojozhuang@gmail.com"
+  },
   "license": "MIT",
   "dependencies": {
     "babel-polyfill": "^6.26.0",
