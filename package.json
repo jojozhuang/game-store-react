@@ -11,10 +11,11 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "npm run client",
     "build": "NODE_ENV=production webpack --env production ",
-    "client":
-      "PORT=12090 webpack-dev-server --env development --devtool inline-source-map --hot"
+    "client": "PORT=12090 webpack-dev-server --env development --devtool inline-source-map --hot"
   },
-  "keywords": ["react"],
+  "keywords": [
+    "react"
+  ],
   "author": {
     "name": "Rong Zhuang",
     "email": "jojozhuang@gmail.com"
@@ -37,15 +38,14 @@
     "babel-preset-react-hmre": "^1.1.1",
     "clean-webpack-plugin": "^0.1.19",
     "copy-webpack-plugin": "^4.5.2",
-    "eslint": "^4.13.1",
+    "eslint": "^5.2.0",
     "eslint-plugin-import": "^2.8.0",
     "eslint-plugin-react": "^7.5.1",
-    "eslint-watch": "^3.1.3",
+    "eslint-watch": "^4.0.2",
     "eventsource-polyfill": "^0.9.6",
     "glob": "^7.1.2",
     "html-webpack-plugin": "^3.2.0",
     "mini-css-extract-plugin": "^0.4.1",
-    "open": "0.0.5",
     "purify-css": "^1.2.5",
     "purifycss-webpack": "^0.7.0",
     "serve-favicon": "^2.4.5",
