@@ -28,7 +28,7 @@ npm start
 ```
 Access http://localhost:12090/ in web browser, enjoy!
 
-# Deployment to Netlify
+# Deployment
 Read tutorial [Deploying Game Store React App to Netlify](https://jojozhuang.github.io/tutorial/react/deploying-game-store-react-app-to-netlify/) to learn how this react app is deployed to Netlify.
 
 # Portfolio
