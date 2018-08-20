@@ -1,10 +1,14 @@
 # Game Store
-A web app to manage products, supporting all CRUD operations, built with React.
-
-# Function
-This app is used to manage products.
+A web app for managing products, supporting all CRUD operations, built with React.
 
 <kbd>![image](/public/assets/productlist.png)</kbd>
+
+# Function
+This application is used to manage products. It implements all CRUD operations. Below are the available features.
+* Product List - Show all products in a list with Edit and Delete button.
+* Product Management - Create, update and delete product.
+* Image Upload - Set image for product and upload to server.
+* Dynamic Data - All data is fetched from backend RESTful services.
 
 # Demo
 Two available demos:
