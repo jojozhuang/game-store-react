@@ -1,5 +1,5 @@
 # Game Store
-A web app for managing products, supporting all CRUD operations, built with React.
+A web app for managing products, built with React and RESTful API.
 
 <kbd>![image](/public/assets/productlist.png)</kbd>
 
