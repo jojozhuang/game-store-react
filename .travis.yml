@@ -7,9 +7,6 @@ branches:
   only:
   - master
 
-cache:
-  directories:
-    - node_modules
 
 deploy:
   provider: heroku
