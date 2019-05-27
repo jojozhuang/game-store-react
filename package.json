@@ -9,7 +9,9 @@
     "lint": "node_modules/.bin/esw webpack.config.* src tools",
     "lint:watch": "npm run lint -- --watch",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "npm run client",
+    "dev": "npm run client",
+    "start": "node server.js",
+    "postinstall": "npm run build",
     "build": "NODE_ENV=production webpack --env production ",
     "build2": "SUBDIR=https://jojozhuang.github.io/game-store-react/ NODE_ENV=production webpack --env production ",
     "client": "PORT=12090 webpack-dev-server --env development --devtool inline-source-map --hot"
@@ -58,5 +60,9 @@
     "webpack-merge": "^4.2.1",
     "lodash": "^4.17.11",
     "fstream": "1.0.12"
+  },
+  "engines": {
+    "node": "9.4.0",
+    "npm": "6.9.0"
   }
 }
