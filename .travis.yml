@@ -13,5 +13,5 @@ deploy:
   skip_cleanup: true
   keep-history: true
   api-key:
-    secure: $HEROKU_API_KEY
+    secure: suJ4qXC+90wjGNvT+C7UQpVV0/UA/CV/ascv27PwyNkiu0iLhDNQCxU67KORS/JOS6Z5V558+kgHZh2A+wFe6dxz0VWJ/jiawEisD3VoOEH2AZlcLneMe1vb27NwyLn7ViN4VUFHROVq6vt13iD0kwcjv6kb59EYlapPYQhRhfbVejWAYLfOAZX5w+0Itqn/hY5cEeqMAm0n9YMN9N5cETvD1Gz63mbWjH4Ftu2B+vc4d/InzPRcAKCpG+HZV+9Oa+AdAuzp/DHD2g3hgrI5XY2kYelx5bB57WDT06GiRAKGjrFADDowSrkAsAv8BYOTK+sNsff/RDpSmLwOZ0/oCHkITohnpuw4IZOBVh/LpagVUw5lzYmxHqIgp2zyPnGZBEbBy0t9kaZ18qco9mCMIAM2tyx5SffBEVuy+AKho5DIGcEJA5pQtfKorP6MEi/VbtCru2Adc5PE19C8/tXiOcHr7KDJHUc5UQlR94uTSzcPkvv51eEunEYqWXE8wzFJ+wKqtZwmW+m6qtUCVlAAB5m+OxPu85RnFWjHesI3kTtwW1jJbuBIPR231xyWcMEFqwKpDBIFUtvjOXby6Vjn05IV45jZNb3ZLEvxU8VrN8MyHk1/2ybVr4eh/nhXGaGhQir20sIegHubK1Hbqpn3+4t+0kVaImlrpX+T05idgmw=
   app: game-store-react
