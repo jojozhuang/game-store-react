@@ -49,7 +49,7 @@ const productionConfig = merge([
   parts.extractCSS({
     use: "css-loader"
   }),
-  parts.purifyCSS({
+  parts.purgeCSS({
     paths: glob.sync(`${PATHS.app}/**/*.js`, { nodir: true })
   }),
   parts.loadImages({
@@ -82,13 +82,14 @@ const developmentConfig = merge([
   parts.loadFonts()
 ]);
 
-module.exports = mode => {
-  console.log(`mode:${mode}`);
-  if (mode === "production") {
-    return merge(commonConfig, productionConfig, { mode });
+module.exports = (env) => {
+  console.log(`env:`)
+  console.log(env)
+  if (env.production === true) {
+    return merge(commonConfig, productionConfig );
   }
 
-  const dev = merge(commonConfig, developmentConfig, { mode });
+  const dev = merge(commonConfig, developmentConfig);
   console.log(dev);
   return dev;
 };
