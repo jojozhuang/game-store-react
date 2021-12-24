@@ -42,10 +42,10 @@
     "babel-preset-react-hmre": "^1.1.1",
     "clean-webpack-plugin": "^0.1.19",
     "copy-webpack-plugin": "^9.1.0",
-    "eslint": "^5.16.0",
+    "eslint": "^8.5.0",
     "eslint-plugin-import": "^2.25.3",
     "eslint-plugin-react": "^7.28.0",
-    "eslint-watch": "^7.0.0",
+    "eslint-watch": "^8.0.0",
     "eventsource-polyfill": "^0.9.6",
     "fstream": "1.0.12",
     "glob": "^7.2.0",
@@ -62,7 +62,7 @@
     "webpack-merge": "^4.2.1"
   },
   "engines": {
-    "node": "14.16.1",
+    "node": "14.17.0",
     "npm": "6.14.12"
   }
 }

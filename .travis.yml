@@ -1,12 +1,11 @@
 language: node_js
 node_js:
-  - "14.16.1"
+  - "14.17.0"
 sudo: false
 
 branches:
   only:
-  - master
-
+    - master
 
 deploy:
   provider: heroku
