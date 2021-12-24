@@ -12,8 +12,8 @@ const Header = () => (
         <Button bsStyle="info" href="/products">
           List
         </Button>
-        <Button bsStyle="info" href="/productpage">
-          Add
+        <Button bsStyle="info" href="/product">
+          Create
         </Button>
       </ButtonToolbar>
     </div>

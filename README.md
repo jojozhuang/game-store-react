@@ -2,7 +2,7 @@
 
 A web app for managing products, built with React and RESTful API.
 
-<kbd>![image](/public/assets/productlist.png)</kbd>
+<kbd>![image](/public/assets/products.png)</kbd>
 
 # Function
 

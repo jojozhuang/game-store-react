@@ -4,7 +4,7 @@ import AlertSimple from "../controls/AlertSimple";
 import ProductForm from "./ProductForm";
 import productApi from "../../api/ProductsApi";
 
-class ProductPage extends React.Component {
+class Product extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -14,9 +14,9 @@ class ProductPage extends React.Component {
         id: "0",
         productName: "",
         price: "",
-        image: process.env.API_URL + "/images/default.png"
+        image: process.env.API_URL + "/images/default.png",
       },
-      isnew: false
+      isnew: false,
     };
 
     this.updateProductState = this.updateProductState.bind(this);
@@ -33,10 +33,10 @@ class ProductPage extends React.Component {
     if (pId) {
       productApi
         .getProduct(pId)
-        .then(product => {
+        .then((product) => {
           this.setState({ product: product });
         })
-        .catch(error => {
+        .catch((error) => {
           this.handleError(error);
         });
     }
@@ -66,19 +66,19 @@ class ProductPage extends React.Component {
     if (this.state.isnew) {
       productApi
         .createProduct(product)
-        .then(response => {
+        .then((response) => {
           this.props.history.push("/products");
         })
-        .catch(error => {
+        .catch((error) => {
           this.handleError(error);
         });
     } else {
       productApi
         .updateProduct(product)
-        .then(response => {
+        .then((response) => {
           this.props.history.push("/products");
         })
-        .catch(error => {
+        .catch((error) => {
           this.handleError(error);
         });
     }
@@ -91,7 +91,6 @@ class ProductPage extends React.Component {
   }
 
   render() {
-    //console.log('ProductPage.render');
     //console.log(this.state);
     let alert = "";
     if (this.state.hasError) {
@@ -118,9 +117,9 @@ class ProductPage extends React.Component {
   }
 }
 
-ProductPage.propTypes = {
+Product.propTypes = {
   match: PropTypes.object.isRequired,
-  history: PropTypes.object.isRequired
+  history: PropTypes.object.isRequired,
 };
 
-export default ProductPage;
+export default Product;
