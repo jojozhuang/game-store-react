@@ -11,7 +11,7 @@ const parts = require("./webpack.parts");
 const outputDirectory = "dist";
 
 const PATHS = {
-  app: path.join(__dirname, "src")
+  app: path.join(__dirname, "src"),
 };
 
 const commonConfig = merge([
@@ -20,7 +20,7 @@ const commonConfig = merge([
     output: {
       path: path.join(__dirname, outputDirectory),
       filename: "bundle.js",
-      publicPath: process.env.SUBDIR || "/"
+      publicPath: process.env.SUBDIR || "/",
     },
     module: {
       rules: [
@@ -28,46 +28,46 @@ const commonConfig = merge([
           test: /\.js$/,
           exclude: /node_modules/,
           use: {
-            loader: "babel-loader"
-          }
-        }
-      ]
+            loader: "babel-loader",
+          },
+        },
+      ],
     },
     plugins: [
       new CleanWebpackPlugin([outputDirectory]),
       new HtmlWebpackPlugin({
-        title: "Online Code Editor",
+        title: "Game Store React",
         template: path.join(__dirname, "./src", "index.html"),
-        favicon: path.join(__dirname, "./public", "assets", "favicon.ico")
-      })
-    ]
-  }
+        favicon: path.join(__dirname, "./public", "assets", "favicon.ico"),
+      }),
+    ],
+  },
 ]);
 
 const productionConfig = merge([
   parts.loadEnv("https://gamestore-api.azurewebsites.net"),
   parts.extractCSS({
-    use: "css-loader"
+    use: "css-loader",
   }),
   parts.purgeCSS({
-    paths: glob.sync(`${PATHS.app}/**/*.js`, { nodir: true })
+    paths: glob.sync(`${PATHS.app}/**/*.js`, { nodir: true }),
   }),
   parts.loadImages({
     options: {
       limit: 100,
       name: "public/images/[name].[ext]",
-      publicPath: "../" // Take the directory into account
-    }
+      publicPath: "../", // Take the directory into account
+    },
   }),
   parts.loadFonts({
     options: {
       limit: 10000,
       mimetype: "application/font-woff",
       name: "public/fonts/[name].[ext]",
-      publicPath: "../" // Take the directory into account
-    }
+      publicPath: "../", // Take the directory into account
+    },
   }),
-  parts.loadStatic()
+  parts.loadStatic(),
 ]);
 
 const developmentConfig = merge([
@@ -75,18 +75,18 @@ const developmentConfig = merge([
   parts.devServer({
     // Customize host/port here if needed
     host: process.env.HOST,
-    port: process.env.PORT
+    port: process.env.PORT,
   }),
   parts.loadCSS(),
   parts.loadImages(),
-  parts.loadFonts()
+  parts.loadFonts(),
 ]);
 
 module.exports = (env) => {
-  console.log(`env:`)
-  console.log(env)
+  console.log(`env:`);
+  console.log(env);
   if (env.production === true) {
-    return merge(commonConfig, productionConfig );
+    return merge(commonConfig, productionConfig);
   }
 
   const dev = merge(commonConfig, developmentConfig);
