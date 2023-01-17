@@ -25,7 +25,6 @@
   "license": "MIT",
   "dependencies": {
     "babel-polyfill": "6.26.0",
-    "braces": "3.0.2",
     "express": "4.17.3",
     "react": "16.14.0",
     "react-bootstrap": "0.31.5",
