@@ -95,7 +95,7 @@ class Products extends React.Component {
                       </Button>
                       <Button
                         bsStyle="danger"
-                        onClick={(e) => this.deleteRow(e, product.id)}
+                        onClick={(e) => this.deleteRow(e, product.id)} // eslint-disable-line
                       >
                         Delete
                       </Button>

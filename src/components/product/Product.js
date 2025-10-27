@@ -7,6 +7,7 @@ import productApi from "../../api/ProductsApi";
 class Product extends React.Component {
   constructor(props) {
     super(props);
+    const pId = this.props.match.params.id;
     this.state = {
       hasError: false,
       error: {},
@@ -16,7 +17,7 @@ class Product extends React.Component {
         price: "",
         image: process.env.API_URL + "/images/default.png",
       },
-      isnew: false,
+      isnew: !pId,
     };
 
     this.updateProductState = this.updateProductState.bind(this);
@@ -27,9 +28,6 @@ class Product extends React.Component {
 
   componentDidMount() {
     const pId = this.props.match.params.id;
-    const isnew = pId == null;
-    this.setState({ isnew: isnew });
-
     if (pId) {
       productApi
         .getProduct(pId)
