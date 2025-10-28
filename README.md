@@ -35,6 +35,8 @@ Setup server to host RESTful API with Spring Boot or ASP.NET Core, see below.
 
 ## 2. React App
 
+Clone the git repo and start it locally. Run with node version `v20.19.5`.
+
 ```bash
 git clone https://github.com/jojozhuang/game-store-react.git
 cd game-store-react
