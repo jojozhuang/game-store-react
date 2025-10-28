@@ -135,7 +135,7 @@ stages:
           - script: npm ci
             displayName: 'Install dependencies (npm ci)'
 
-          - script: npm run build -- --configuration production
+          - script: npm run build
             displayName: 'Build (production)'
 
           - script: |
