@@ -8,7 +8,21 @@ import AlertSimple from '../controls/AlertSimple';
 
 // Mock the API
 jest.mock('../../api/ProductsApi');
-jest.mock('../controls/AlertSimple', () => ({ error }) => <div>{error.message}</div>);
+jest.mock('../controls/AlertSimple', () => {
+  const React = require('react');
+  const PropTypes = require('prop-types');
+
+  const MockAlert = ({ error }) => <div>{error.message}</div>;
+
+  MockAlert.displayName = 'MockAlert';
+  MockAlert.propTypes = {
+    error: PropTypes.shape({
+      message: PropTypes.string,
+    }),
+  };
+
+  return MockAlert;
+});
 
 describe('Products component', () => {
   const mockProducts = [

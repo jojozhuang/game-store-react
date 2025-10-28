@@ -9,6 +9,7 @@
     "lint": "node_modules/.bin/esw webpack.config.* src tools",
     "lint:watch": "npm run lint -- --watch",
     "test": "react-scripts test --watchAll=false",
+    "test-headless": "npm run test",
     "dev": "NODE_ENV=development npm run client",
     "start": "node server.js",
     "build": "NODE_ENV=production webpack --env production",
@@ -33,7 +34,7 @@
     "react-router-dom": "4.3.1"
   },
   "devDependencies": {
-    "@babel/core": "7.20.12",
+    "@babel/core": "7.22.0",
     "@babel/node": "7.20.7",
     "@babel/preset-env": "7.20.2",
     "@babel/preset-react": "7.18.6",
