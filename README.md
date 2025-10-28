@@ -1,3 +1,5 @@
+[![Build Status](https://dev.azure.com/jojozhuang0911/portfolios/_apis/build/status%2Fjojozhuang.game-store-react?branchName=refs%2Fpull%2F43%2Fmerge)](https://dev.azure.com/jojozhuang0911/portfolios/_build/latest?definitionId=3&branchName=refs%2Fpull%2F43%2Fmerge) [![Netlify Status](https://api.netlify.com/api/v1/badges/a72886eb-91f2-4d28-8d50-38bd4c9d34d7/deploy-status)](https://app.netlify.com/projects/game-store-react/deploys)
+
 # Game Store
 
 A web app for managing products, built with React and RESTful API.
