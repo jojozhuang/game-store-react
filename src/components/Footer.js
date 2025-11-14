@@ -5,7 +5,7 @@ const Footer = () => {
     <div>
       <hr />
       <footer className="container-fluid text-center">
-        <p>&copy; 2021 jojozhuang.github.io, All rights reserved.</p>
+        <p>&copy; {new Date().getFullYear()} jojozhuang.github.io, All rights reserved.</p>
       </footer>
     </div>
   );
