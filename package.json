@@ -13,6 +13,9 @@
     "dev": "NODE_ENV=development npm run client",
     "start": "node server.js",
     "build": "NODE_ENV=production webpack --env production",
+    "build:azure": " NODE_ENV=production REACT_APP_ENV_NAME=Azure webpack --env production",
+    "build:netlify": " NODE_ENV=production REACT_APP_ENV_NAME=Netlify webpack --env production",
+    "build:render": "NODE_ENV=production REACT_APP_ENV_NAME=Render webpack --env production",
     "build2": "SUBDIR=https://jojozhuang.github.io/game-store-react/ NODE_ENV=production webpack --env production ",
     "client": "PORT=12090 webpack serve --env development --devtool inline-source-map --hot"
   },
