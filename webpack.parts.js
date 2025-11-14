@@ -4,9 +4,13 @@ exports.devServer = ({ host, port } = {}) => ({
     port, // Defaults to 8080
     open: true,
     historyApiFallback: true,
-    proxy: {
-      "/api": process.env.API_URL,
-    },
+    proxy: [
+      {
+        context: ["/api"],
+        target: process.env.API_URL,
+        changeOrigin: true
+      }
+    ]
   },
 });
 
