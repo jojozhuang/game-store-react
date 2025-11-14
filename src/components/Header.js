@@ -2,7 +2,7 @@ import React from "react";
 import { Button, ButtonToolbar, Label } from "react-bootstrap";
 
 const Header = () => {
-  const labelText = process.env.REACT_APP_LABEL_TEXT || "Local";
+  const envName = process.env.REACT_APP_ENV_NAME || "Local";
 
   return (
     <div>
@@ -18,7 +18,7 @@ const Header = () => {
           <Button bsStyle="info" href="/product">
             Create
           </Button>
-          <h4><Label bsStyle="success" style={{ marginLeft: '10px', top: '-4px', position: 'relative'}}>{labelText}</Label></h4>
+          <h4><Label bsStyle="success" style={{ marginLeft: '10px', top: '-4px', position: 'relative' }}>{envName}</Label></h4>
         </ButtonToolbar>
       </div>
       <hr />
