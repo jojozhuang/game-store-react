@@ -18,7 +18,7 @@ const Header = () => {
           <Button bsStyle="info" href="/product">
             Create
           </Button>
-          <Label bsStyle="success" style={{ marginLeft: '10px', top: '5px', position: 'relative'}}>Local</Label>
+          <h4><Label bsStyle="success" style={{ marginLeft: '10px', top: '-4px', position: 'relative'}}>{labelText}</Label></h4>
         </ButtonToolbar>
       </div>
       <hr />

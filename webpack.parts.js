@@ -118,6 +118,7 @@ exports.loadEnv = (url) => ({
     new webpack.DefinePlugin({
       "process.env": {
         API_URL: JSON.stringify(url),
+        REACT_APP_LABEL_TEXT: JSON.stringify(process.env.REACT_APP_LABEL_TEXT),
       },
     }),
   ],
