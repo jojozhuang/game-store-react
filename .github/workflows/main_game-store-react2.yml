@@ -6,7 +6,7 @@ name: Deploy to Azure game-store-react2
 on:
   push:
     branches:
-      - refine-deployment-to-react2
+      - main
   workflow_dispatch:
 
 jobs:
@@ -32,7 +32,7 @@ jobs:
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
         with:
-          name: node-app
+          name: react-app
           path: ./dist
 
   deploy:
@@ -43,7 +43,7 @@ jobs:
       - name: Download artifact from build job
         uses: actions/download-artifact@v4
         with:
-          name: node-app
+          name: react-app
 
       - name: 'Deploy to Azure Web App'
         id: deploy-to-webapp
