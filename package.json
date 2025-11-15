@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Game Store built with ReactJS",
   "main": "index.js",
+  "homepage": "https://jojozhuang.github.io/game-store-react",
   "scripts": {
     "start": "NODE_ENV=development npm run client",
     "client": "PORT=12090 webpack serve --env development --devtool inline-source-map --hot",
