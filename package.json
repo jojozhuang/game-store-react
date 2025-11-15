@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Game Store built with ReactJS",
   "main": "index.js",
+  "homepage": "https://jojozhuang.github.io/game-store-react",
   "scripts": {
     "start": "NODE_ENV=development npm run client",
     "client": "PORT=12090 webpack serve --env development --devtool inline-source-map --hot",
@@ -17,6 +18,7 @@
     "build:netlify": "REACT_APP_ENV_NAME=Netlify npm run build",
     "build:render": "REACT_APP_ENV_NAME=Render npm run build",
     "build:pages": "HOST_URL=https://jojozhuang.github.io/game-store-react/ REACT_APP_ENV_NAME=Pages npm run build",
+    "postbuild": "cp dist/index.html dist/404.html",
     "lint": "node_modules/.bin/esw webpack.config.* src tools",
     "lint:watch": "npm run lint -- --watch",
     "test": "react-scripts test --watchAll=false",
