@@ -22,6 +22,7 @@ Two available demos:
 - `Live Demo on Netlify(CI):` <a href="https://game-store-react.netlify.app/" target="\_blank">https://game-store-react.netlify.app/</a>
 - `Live Demo on Render(CI):` <a href="https://game-store-react.onrender.com/" target="\_blank">https://game-store-react.onrender.com/</a>
 - `Live Demo on Azure:` <a href="https://game-store-react.azurewebsites.net/" target="\_blank">https://game-store-react.azurewebsites.net/</a>
+- `Live Demo on GitHub Page:` <a href="https://jojozhuang.github.io/game-store-react/" target="\_blank">https://jojozhuang.github.io/game-store-react/</a>
 
 _Note: The demo websites may be slow when you access them for the first time. Be patient!_
 

@@ -90,7 +90,7 @@ class Products extends React.Component {
                   </td>
                   <td>
                     <ButtonToolbar>
-                      <Button bsStyle="success" href={"/product/" + product.id}>
+                      <Button bsStyle="success" href={"./product/" + product.id}>
                         Edit
                       </Button>
                       <Button
