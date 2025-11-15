@@ -16,7 +16,7 @@
     "build:azure": "REACT_APP_ENV_NAME=Azure npm run build",
     "build:netlify": "REACT_APP_ENV_NAME=Netlify npm run build",
     "build:render": "REACT_APP_ENV_NAME=Render npm run build",
-    "build:pages": "REACT_APP_ENV_NAME=Pages npm run build",
+    "build:pages": "BASE_HREF=https://jojozhuang.github.io/game-store-react/ REACT_APP_ENV_NAME=Pages npm run build",
     "lint": "node_modules/.bin/esw webpack.config.* src tools",
     "lint:watch": "npm run lint -- --watch",
     "test": "react-scripts test --watchAll=false",
