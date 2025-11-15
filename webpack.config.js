@@ -20,7 +20,7 @@ const commonConfig = merge([
     output: {
       path: path.join(__dirname, outputDirectory),
       filename: "bundle.js",
-      publicPath: process.env.SUBDIR || "/",
+      publicPath: process.env.BASE_HREF || "/",
     },
     module: {
       rules: [
