@@ -19,7 +19,7 @@ This application is used to manage products. It implements all CRUD operations. 
 
 Two available demos:
 
-- `Live Demo on Netlify(CI):` <a href="https://game-store-react.netlify.com/" target="\_blank">https://game-store-react.netlify.com/</a>
+- `Live Demo on Netlify(CI):` <a href="https://game-store-react.netlify.app/" target="\_blank">https://game-store-react.netlify.app/</a>
 - `Live Demo on Render(CI):` <a href="https://game-store-react.onrender.com/" target="\_blank">https://game-store-react.onrender.com/</a>
 - `Live Demo on Azure:` <a href="https://game-store-react.azurewebsites.net/" target="\_blank">https://game-store-react.azurewebsites.net/</a>
 

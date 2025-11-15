@@ -2,6 +2,7 @@ import webpack from "webpack";
 import path from "path";
 
 export default {
+  mode: "development",
   devtool: "eval-cheap-module-source-map",
   entry: [
     "eventsource-polyfill", // necessary for hot reloading with IE
@@ -19,15 +20,17 @@ export default {
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin(),
     new webpack.DefinePlugin({
       "process.env": {
         API_URL: JSON.stringify("http://localhost:8080")
       }
     })
   ],
+  optimization: {
+    noEmitOnErrors: true
+  },
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.js$/,
         include: path.join(__dirname, "src"),
