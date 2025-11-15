@@ -19,7 +19,7 @@ const Header = () => {
             Create
           </Button>
           <h4><Label bsStyle="success" style={{ marginLeft: '10px', top: '-4px', position: 'relative' }}>{envName}</Label></h4>
-          <h4>test 1</h4>
+          <h4>test 2</h4>
         </ButtonToolbar>
       </div>
       <hr />
