@@ -9,7 +9,7 @@ import Product from "./product/Product";
 const App = () => (
   <div>
     <Header />
-    <Switch basename="/game-store-react">
+    <Switch>
       <Route exact path="/" component={Home} />
       <Route path="/products" component={Products} />
       <Route exact path="/product" component={Product} />
