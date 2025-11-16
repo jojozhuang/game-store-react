@@ -44,6 +44,42 @@ class Product extends React.Component {
     }
   }
 
+  componentDidUpdate(prevProps) {
+    const prevId = prevProps.router.params.id;
+    const currentId = this.props.router.params.id;
+
+    // Case 1: Navigated from /product/:id → /product
+    if (prevId && !currentId) {
+      this.setState({
+        isnew: true,
+        product: {
+          id: "0",
+          productName: "",
+          price: "",
+          image: process.env.API_URL + "/images/default.png",
+        },
+        hasError: false,
+        error: {},
+      });
+      return;
+    }
+
+    // Case 2: Navigated to a different ID → reload product
+    if (currentId && prevId !== currentId) {
+      productApi
+        .getProduct(currentId)
+        .then((product) =>
+          this.setState({
+            product,
+            isnew: false,
+            hasError: false,
+            error: {},
+          })
+        )
+        .catch((error) => this.handleError(error));
+    }
+  }
+
   updateProductState(event) {
     const field = event.target.name;
     const product = { ...this.state.product };
