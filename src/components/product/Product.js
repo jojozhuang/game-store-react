@@ -3,11 +3,14 @@ import PropTypes from "prop-types";
 import AlertSimple from "../controls/AlertSimple";
 import ProductForm from "./ProductForm";
 import productApi from "../../api/ProductsApi";
+import { withRouter } from "../../utils/withRouter";
 
 class Product extends React.Component {
   constructor(props) {
     super(props);
-    const pId = this.props.match.params.id;
+
+    const pId = this.props.router.params.id;
+
     this.state = {
       hasError: false,
       error: {},
@@ -27,12 +30,13 @@ class Product extends React.Component {
   }
 
   componentDidMount() {
-    const pId = this.props.match.params.id;
+    const pId = this.props.router.params.id;
+
     if (pId) {
       productApi
         .getProduct(pId)
         .then((product) => {
-          this.setState({ product: product });
+          this.setState({ product });
         })
         .catch((error) => {
           this.handleError(error);
@@ -42,69 +46,50 @@ class Product extends React.Component {
 
   updateProductState(event) {
     const field = event.target.name;
-    const product = this.state.product;
+    const product = { ...this.state.product };
     product[field] = event.target.value;
-    return this.setState({ product: product });
+    this.setState({ product });
   }
 
   handleImageChange(image) {
-    // clear error
-    this.setState({ hasError: false });
-    this.setState({ error: null });
-    // update product to inform child component
-    const product = this.state.product;
-    product["image"] = image;
-    return this.setState({ product: this.state.product });
+    this.setState({
+      hasError: false,
+      error: null,
+      product: { ...this.state.product, image }
+    });
   }
 
   handleSave(event) {
     event.preventDefault();
-    let product = this.state.product;
-    //console.log(product);
-    if (this.state.isnew) {
-      productApi
-        .createProduct(product)
-        .then((response) => {
-          this.props.history.push("/products");
-        })
-        .catch((error) => {
-          this.handleError(error);
-        });
-    } else {
-      productApi
-        .updateProduct(product)
-        .then((response) => {
-          this.props.history.push("/products");
-        })
-        .catch((error) => {
-          this.handleError(error);
-        });
-    }
+
+    const product = this.state.product;
+    const navigate = this.props.router.navigate;
+
+    const saveOperation = this.state.isnew
+      ? productApi.createProduct(product)
+      : productApi.updateProduct(product);
+
+    saveOperation
+      .then(() => navigate("/products"))
+      .catch((error) => this.handleError(error));
   }
 
   handleError(error) {
-    //console.log(error);
-    this.setState({ error: error });
-    this.setState({ hasError: true });
+    this.setState({ error, hasError: true });
   }
 
   render() {
-    //console.log(this.state);
-    let alert = "";
-    if (this.state.hasError) {
-      alert = <AlertSimple error={this.state.error} />;
-    }
-    let pageTitle = "Edit Product";
-    if (this.state.isnew) {
-      pageTitle = "Create New Product";
-    }
+    const { hasError, error, isnew, product } = this.state;
+
     return (
       <div className="container">
-        <h2>{pageTitle}</h2>
-        {alert}
+        <h2>{isnew ? "Create New Product" : "Edit Product"}</h2>
+
+        {hasError && <AlertSimple error={error} />}
+
         <ProductForm
-          product={this.state.product}
-          isnew={this.state.isnew}
+          product={product}
+          isnew={isnew}
           onChange={this.updateProductState}
           onImageChange={this.handleImageChange}
           onSave={this.handleSave}
@@ -116,8 +101,11 @@ class Product extends React.Component {
 }
 
 Product.propTypes = {
-  match: PropTypes.object.isRequired,
-  history: PropTypes.object.isRequired,
+  router: PropTypes.shape({
+    params: PropTypes.object.isRequired,
+    navigate: PropTypes.func.isRequired,
+    location: PropTypes.object.isRequired,
+  }).isRequired,
 };
 
-export default Product;
+export default withRouter(Product);
