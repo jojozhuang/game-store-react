@@ -1,4 +1,5 @@
 import React from "react";
+import { LinkContainer } from "react-router-bootstrap";
 import { Button, ButtonToolbar, Label } from "react-bootstrap";
 
 const Header = () => {
@@ -9,16 +10,18 @@ const Header = () => {
       <div className="container">
         <h2>React Tutorial - Product Management</h2>
         <ButtonToolbar>
-          <Button bsStyle="info" href="/">
-            Home
-          </Button>
-          <Button bsStyle="info" href="/products">
-            List
-          </Button>
-          <Button bsStyle="info" href="/product">
-            Create
-          </Button>
-          <h4><Label bsStyle="success" style={{ marginLeft: '10px', top: '-4px', position: 'relative' }}>{envName}</Label></h4>
+          <LinkContainer to="/">
+            <Button bsStyle="info">Home</Button>
+          </LinkContainer>
+
+          <LinkContainer to="/products">
+            <Button bsStyle="info">List</Button>
+          </LinkContainer>
+
+          <LinkContainer to="/product">
+            <Button bsStyle="info">Create</Button>
+          </LinkContainer>
+           <h4><Label bsStyle="success" style={{ marginLeft: '10px', top: '-4px', position: 'relative' }}>{envName}</Label></h4>
         </ButtonToolbar>
       </div>
       <hr />
