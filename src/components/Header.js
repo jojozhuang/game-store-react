@@ -25,7 +25,6 @@ const Header = () => {
         </ButtonToolbar>
       </div>
       <hr />
-      <h3>Test 1</h3>
     </div>
   );
 };

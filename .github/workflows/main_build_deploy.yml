@@ -10,7 +10,7 @@ name: Build and Deploy
 on:
   push:
     branches:
-      - deploy-with-single-action-react
+      - main
   workflow_dispatch:
 
 jobs:
