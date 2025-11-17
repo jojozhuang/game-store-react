@@ -48,7 +48,7 @@
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^12.1.5",
     "@testing-library/user-event": "^13.5.0",
-    "babel-jest": "^30.2.0",
+    "babel-jest": "^29.7.0",
     "babel-loader": "9.1.2",
     "clean-webpack-plugin": "1.0.1",
     "copy-webpack-plugin": "11.0.0",
