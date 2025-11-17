@@ -1,3 +1,5 @@
+# https://jojozhuang.github.io/game-store-react/
+
 name: Deploy to GitHub Pages
 
 on:
