@@ -1,14 +1,11 @@
-const { merge } = require('webpack-merge');
-const HtmlWebpackPlugin = require("html-webpack-plugin");
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const webpack = require("webpack");
-
 const path = require("path");
 const glob = require("glob");
+const { merge } = require("webpack-merge");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+const webpack = require("webpack");
 
 const parts = require("./webpack.parts");
-
-const outputDirectory = "dist";
 
 const PATHS = {
   app: path.join(__dirname, "src"),
@@ -18,8 +15,8 @@ const commonConfig = merge([
   {
     entry: "./src/index.js",
     output: {
-      path: path.join(__dirname, outputDirectory),
-      filename: "bundle.js",
+      path: path.join(__dirname, "dist"),
+      filename: "[name].[contenthash].js",
       publicPath: process.env.HOST_URL || "/",
     },
     module: {
@@ -27,9 +24,7 @@ const commonConfig = merge([
         {
           test: /\.js$/,
           exclude: /node_modules/,
-          use: {
-            loader: "babel-loader",
-          },
+          use: "babel-loader",
         },
       ],
     },
@@ -37,35 +32,23 @@ const commonConfig = merge([
       new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({
         title: "Game Store React",
-        template: path.join(__dirname, "./src", "index.html"),
-        favicon: path.join(__dirname, "./public", "assets", "favicon.ico"),
+        template: path.join(PATHS.app, "index.html"),
+        favicon: path.join(__dirname, "public/assets/favicon.ico"),
       }),
+      new webpack.HotModuleReplacementPlugin(), // hot reload for dev
     ],
   },
 ]);
 
 const productionConfig = merge([
   parts.loadEnv("https://gamestore-api.azurewebsites.net"),
-  parts.extractCSS({
-    use: "css-loader",
-  }),
-  parts.purgeCSS({
-    paths: glob.sync(`${PATHS.app}/**/*.js`, { nodir: true }),
-  }),
+  parts.extractCSS({ use: ["css-loader"] }),
+  parts.purgeCSS({ paths: glob.sync(`${PATHS.app}/**/*.js`, { nodir: true }) }),
   parts.loadImages({
-    options: {
-      limit: 100,
-      name: "public/images/[name].[ext]",
-      publicPath: "../", // Take the directory into account
-    },
+    options: { name: "images/[name].[ext]", publicPath: "../" },
   }),
   parts.loadFonts({
-    options: {
-      limit: 10000,
-      mimetype: "application/font-woff",
-      name: "public/fonts/[name].[ext]",
-      publicPath: "../", // Take the directory into account
-    },
+    options: { name: "fonts/[name].[ext]", publicPath: "../" },
   }),
   parts.loadStatic(),
 ]);
@@ -73,77 +56,21 @@ const productionConfig = merge([
 const developmentConfig = merge([
   parts.loadEnv("http://localhost:8080"),
   parts.devServer({
-    // Customize host/port here if needed
-    host: process.env.HOST,
-    port: process.env.PORT,
+    host: process.env.HOST || "localhost",
+    port: process.env.PORT || 12090,
   }),
   parts.loadCSS(),
   parts.loadImages(),
   parts.loadFonts(),
+  {
+    devtool: "eval-cheap-module-source-map", // faster rebuilds
+    mode: "development",
+  },
 ]);
 
 module.exports = (env) => {
-  console.log(`env:`);
-  console.log(env);
-  if (env.production === true) {
-    return merge(commonConfig, productionConfig);
+  if (env && env.production) {
+    return merge(commonConfig, productionConfig, { mode: "production" });
   }
-
-  const dev = merge(commonConfig, developmentConfig);
-  console.log(dev);
-  return dev;
+  return merge(commonConfig, developmentConfig, { mode: "development" });
 };
-
-/*
-const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
-
-const outputDirectory = 'dist';
-
-module.exports = {
-  entry: './src/client/index.js',
-  output: {
-    path: path.join(__dirname, outputDirectory),
-    filename: 'bundle.js',
-    publicPath: '/',
-  },
-  module: {
-    rules: [
-      {
-        test: /\.js$/,
-        exclude: /node_modules/,
-        use: {
-          loader: 'babel-loader',
-        },
-      },
-      {
-        test: /\.css$/,
-        use: ['style-loader', 'css-loader'],
-      },
-      {
-        test: /\.(png|jpg|gif|svg|eot|ttf|woff|woff2)$/,
-        loader: 'url-loader',
-        options: {
-          limit: 10000,
-        },
-      },
-    ],
-  },
-  devServer: {
-    port: 3000,
-    open: true,
-    proxy: {
-      '/api': 'http://localhost:8080',
-    },
-    historyApiFallback: true,
-  },
-  plugins: [
-    new CleanWebpackPlugin([outputDirectory]),
-    new HtmlWebpackPlugin({
-      template: './public/index.html',
-      favicon: './public/favicon.ico',
-    }),
-  ],
-};
-*/
