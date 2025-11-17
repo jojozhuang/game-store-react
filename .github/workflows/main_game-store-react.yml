@@ -7,7 +7,7 @@ name: Deploy to Azure game-store-react
 on:
   push:
     branches:
-      - fix-deployment-to-game-react
+      - main
   workflow_dispatch:
 
 jobs:
