@@ -10,7 +10,7 @@ name: Build and Deploy
 on:
   push:
     branches:
-      - main
+      - add-e2e-test-with-cypress
   workflow_dispatch:
 
 jobs:
