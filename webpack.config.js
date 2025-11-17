@@ -1,6 +1,6 @@
-const merge = require("webpack-merge");
+const { merge } = require('webpack-merge');
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const CleanWebpackPlugin = require("clean-webpack-plugin");
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const webpack = require("webpack");
 
 const path = require("path");
@@ -34,7 +34,7 @@ const commonConfig = merge([
       ],
     },
     plugins: [
-      new CleanWebpackPlugin([outputDirectory]),
+      new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({
         title: "Game Store React",
         template: path.join(__dirname, "./src", "index.html"),
