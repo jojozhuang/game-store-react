@@ -10,7 +10,7 @@ name: Build and Deploy
 on:
   push:
     branches:
-      - main
+      - refine-webpack-impl
   workflow_dispatch:
 
 jobs:
