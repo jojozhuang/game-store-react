@@ -1,16 +1,21 @@
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const PurgeCSSPlugin = require("purgecss-webpack-plugin");
+const CopyWebpackPlugin = require("copy-webpack-plugin");
+const webpack = require("webpack");
+
 exports.devServer = ({ host, port } = {}) => ({
   devServer: {
-    host, // Defaults to `localhost`
-    port, // Defaults to 8080
+    host: host || "localhost",
+    port: port || 8080,
     open: true,
     historyApiFallback: true,
-    proxy: [
-      {
-        context: ["/api"],
+    hot: true,
+    proxy: {
+      "/api": {
         target: process.env.API_URL,
-        changeOrigin: true
-      }
-    ]
+        changeOrigin: true,
+      },
+    },
   },
 });
 
@@ -21,19 +26,15 @@ exports.loadCSS = ({ include, exclude } = {}) => ({
         test: /\.css$/,
         include,
         exclude,
-
         use: ["style-loader", "css-loader"],
       },
     ],
   },
 });
 
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-
 exports.extractCSS = ({ include, exclude, use }) => {
-  // Output extracted CSS to a file
   const plugin = new MiniCssExtractPlugin({
-    filename: "./styles/[name].css",
+    filename: "styles/[name].[contenthash].css",
   });
 
   return {
@@ -43,7 +44,6 @@ exports.extractCSS = ({ include, exclude, use }) => {
           test: /\.css$/,
           include,
           exclude,
-
           use: [MiniCssExtractPlugin.loader].concat(use),
         },
       ],
@@ -51,8 +51,6 @@ exports.extractCSS = ({ include, exclude, use }) => {
     plugins: [plugin],
   };
 };
-
-const PurgeCSSPlugin = require("purgecss-webpack-plugin");
 
 exports.purgeCSS = ({ paths }) => ({
   plugins: [new PurgeCSSPlugin({ paths })],
@@ -62,12 +60,18 @@ exports.loadImages = ({ include, exclude, options } = {}) => ({
   module: {
     rules: [
       {
-        test: /\.(png|jpg)$/,
+        test: /\.(png|jpe?g|gif|svg)$/i,
         include,
         exclude,
-        use: {
-          loader: "url-loader",
-          options,
+        type: "asset",
+        parser: {
+          dataUrlCondition: {
+            maxSize: (options && options.limit) || 8192,
+          },
+        },
+        generator: {
+          filename: options?.name || "images/[name][ext]",
+          publicPath: options?.publicPath || "",
         },
       },
     ],
@@ -78,44 +82,34 @@ exports.loadFonts = ({ include, exclude, options } = {}) => ({
   module: {
     rules: [
       {
-        test: /\.(ttf|eot|woff|woff2)$/,
+        test: /\.(woff|woff2|eot|ttf|otf)$/,
         include,
         exclude,
-        use: {
-          loader: "url-loader",
-          options,
+        type: "asset",
+        parser: {
+          dataUrlCondition: {
+            maxSize: (options && options.limit) || 10000,
+          },
+        },
+        generator: {
+          filename: options?.name || "fonts/[name][ext]",
+          publicPath: options?.publicPath || "",
         },
       },
     ],
   },
 });
 
-const CopyWebpackPlugin = require("copy-webpack-plugin");
-
 exports.loadStatic = () => ({
   plugins: [
     new CopyWebpackPlugin({
       patterns: [
-        {
-          from: "./public/_redirects",
-          to: "./_redirects",
-          toType: "file",
-        },
-      ],
-    }),
-    new CopyWebpackPlugin({
-      patterns: [
-        {
-          from: "./public/web.config",
-          to: "./web.config",
-          toType: "file",
-        },
+        { from: "./public/_redirects", to: "./_redirects" },
+        { from: "./public/web.config", to: "./web.config" },
       ],
     }),
   ],
 });
-
-const webpack = require("webpack");
 
 exports.loadEnv = (url) => ({
   plugins: [
