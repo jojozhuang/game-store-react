@@ -14,12 +14,7 @@ class Product extends React.Component {
     this.state = {
       hasError: false,
       error: {},
-      product: {
-        id: "0",
-        productName: "",
-        price: "",
-        image: process.env.API_URL + "/images/default.png",
-      },
+      product: this.getEmptyProduct(),
       isnew: !pId,
     };
 
@@ -31,16 +26,8 @@ class Product extends React.Component {
 
   componentDidMount() {
     const pId = this.props.router.params.id;
-
     if (pId) {
-      productApi
-        .getProduct(pId)
-        .then((product) => {
-          this.setState({ product });
-        })
-        .catch((error) => {
-          this.handleError(error);
-        });
+      this.loadProduct(pId);
     }
   }
 
@@ -48,60 +35,69 @@ class Product extends React.Component {
     const prevId = prevProps.router.params.id;
     const currentId = this.props.router.params.id;
 
-    // Case 1: Navigated from /product/:id → /product
-    if (prevId && !currentId) {
-      this.setState({
-        isnew: true,
-        product: {
-          id: "0",
-          productName: "",
-          price: "",
-          image: process.env.API_URL + "/images/default.png",
-        },
-        hasError: false,
-        error: {},
-      });
-      return;
+    // Only update state if the product ID changed
+    if (prevId !== currentId) {
+      if (currentId) {
+        this.loadProduct(currentId);
+      } else {
+        // Reset form for new product
+        // eslint-disable-next-line react/no-did-update-set-state
+        this.setState({
+          product: this.getEmptyProduct(),
+          isnew: true,
+          hasError: false,
+          error: {},
+        });
+      }
     }
+  }
 
-    // Case 2: Navigated to a different ID → reload product
-    if (currentId && prevId !== currentId) {
-      productApi
-        .getProduct(currentId)
-        .then((product) =>
-          this.setState({
-            product,
-            isnew: false,
-            hasError: false,
-            error: {},
-          })
-        )
-        .catch((error) => this.handleError(error));
-    }
+  getEmptyProduct() {
+    return {
+      id: "0",
+      productName: "",
+      price: "",
+      image: process.env.API_URL + "/images/default.png",
+    };
+  }
+
+  loadProduct(pId) {
+    if (!pId) return;
+
+    productApi
+      .getProduct(pId)
+      .then((product) => this.setState({ product, isnew: false }))
+      .catch((error) => this.handleError(error));
   }
 
   updateProductState(event) {
+    if (!event?.target) return;
+
     const field = event.target.name;
-    const product = { ...this.state.product };
-    product[field] = event.target.value;
-    this.setState({ product });
+    const value = event.target.value;
+
+    this.setState((prevState) => ({
+      product: {
+        ...prevState.product,
+        [field]: value,
+      },
+    }));
   }
 
   handleImageChange(image) {
-    this.setState({
+    this.setState((prevState) => ({
+      product: { ...prevState.product, image },
       hasError: false,
       error: null,
-      product: { ...this.state.product, image }
-    });
+    }));
   }
 
   handleSave(event) {
     event.preventDefault();
-
-    const product = this.state.product;
+    const { product, isnew } = this.state;
     const navigate = this.props.router.navigate;
 
-    const saveOperation = this.state.isnew
+    const saveOperation = isnew
       ? productApi.createProduct(product)
       : productApi.updateProduct(product);
 
