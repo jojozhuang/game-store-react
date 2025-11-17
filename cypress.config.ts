@@ -1,0 +1,17 @@
+const config: any = {
+  e2e: {
+    // include existing .cy.ts specs and legacy integration folder
+    specPattern: ['cypress/**/*.cy.{js,ts}', 'cypress/integration/**/*.cy.{js,ts}'],
+    supportFile: 'cypress/support/index.ts',
+    videosFolder: 'cypress/videos',
+    downloadsFolder: 'cypress/downloads',
+    baseUrl: 'https://game-store-react.netlify.app/',
+    pageLoadTimeout: 120000, // 2 minutes
+    setupNodeEvents(on, cfg) {
+      // keep default behavior; add plugins here if needed
+      return cfg;
+    }
+  }
+};
+
+export default config;
