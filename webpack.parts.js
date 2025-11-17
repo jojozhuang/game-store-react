@@ -104,8 +104,9 @@ exports.loadStatic = () => ({
   plugins: [
     new CopyWebpackPlugin({
       patterns: [
-        { from: "./public/_redirects", to: "./_redirects" },
-        { from: "./public/web.config", to: "./web.config" },
+        { from: "./public/_redirects", to: "./_redirects", toType: "file" },
+        { from: "./public/_headers", to: "./_headers", toType: "file" },
+        { from: "./public/web.config", to: "./web.config", toType: "file" },
       ],
     }),
   ],
