@@ -10,7 +10,7 @@ name: Build and Deploy
 on:
   push:
     branches:
-      - main
+      - add-e2e-test-with-cypress
   workflow_dispatch:
 
 jobs:
@@ -56,6 +56,9 @@ jobs:
 
       - name: Run unit tests
         run: npm run test:headless
+
+      - name: Run e2e tests
+        run: npm run e2e:headless
 
   deploy-azure-game-store:
     name: Deploy to Azure game-1
